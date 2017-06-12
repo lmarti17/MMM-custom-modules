@@ -1,0 +1,64 @@
+/*
+ *
+ * {{MODULE_NAME}}
+ *
+ * {{AUTHOR_NAME}}
+ * {{LICENSE}} Licensed.
+ *
+ * Custom here your css module
+ *
+ */
+ #timer{
+	font-size: 80px;
+	color: #FFFFFF;
+}
+
+.point {
+    position: relative;
+    -moz-animation: mymove 2s ease infinite;
+    -webkit-animation: mymove 2s ease infinite;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.chrono{
+	color: #FFFFFF;
+}
+
+.final-message{
+	color: #4aea0d;
+}
+
+/* Simple Animation */
+@-webkit-keyframes mymove {
+    0% {opacity: 1.0;
+    text-shadow: 0 0 20px #00c6ff;
+}
+
+50% {
+    opacity: 0;
+    text-shadow: none;
+}
+
+100% {
+    opacity: 1.0;
+    text-shadow: 0 0 20px #00c6ff;
+}
+}
+
+@-moz-keyframes mymove {
+    0% {
+        opacity: 1.0;
+        text-shadow: 0 0 20px #00c6ff;
+    }
+
+    50% {
+        opacity: 0;
+        text-shadow: none;
+    }
+
+    100% {
+        opacity: 1.0;
+        text-shadow: 0 0 20px #00c6ff;
+    };
+}

@@ -1,0 +1,21 @@
+{
+  "name": "CITYMAPPER",
+  "version": "1.0.0",
+  "description": "Citymapper module alows you to find you travel time for your journey",
+  "main": "MMM-citymapper.js",
+  "author": "Lucas Martin",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "latest",
+    "grunt-eslint": "latest",
+    "grunt-jsonlint": "latest",
+    "grunt-markdownlint": "^1.0.13",
+    "grunt-stylelint": "latest",
+    "grunt-yamllint": "latest",
+    "stylelint-config-standard": "latest",
+    "time-grunt": "latest"
+  },
+  "dependencies": {
+    "axios": "^0.16.2"
+  }
+}

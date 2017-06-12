@@ -1,0 +1,23 @@
+/*
+ *
+ * ratpschedule
+ *
+ * Lucas Martin
+ * MIT Licensed.
+ *
+ * Custom here your css module
+ *
+ */
+
+
+#ratpschedule p.schedule__single{
+
+  font-size: 25px;
+  margin: 10px 0;
+
+}
+
+#ratpschedule p.schedule__single span{
+
+  margin-left: 15px;
+}
