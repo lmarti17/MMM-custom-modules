@@ -15,10 +15,8 @@ Module.register("ratpschedule", {
 		baseUrl: "https://api-ratp.pierre-grimaud.fr/v3",
 
 		endpoint: "traffic",
-		activeItem: 0,
-		arrayOfSchedule: [],
 
-		updateInterval: 10 * 1000,
+		updateInterval: 5 * 1000,
 		animationSpeed: 2.5 * 1000,
 
 		// endpoint: "schedules",
@@ -36,6 +34,9 @@ Module.register("ratpschedule", {
 
 		var self = this;
 
+		this.activeItem = 0,
+		this.arrayOfSchedule = [],
+
 		this.getDom();
 		// this.getSchedule();
 
@@ -46,20 +47,34 @@ Module.register("ratpschedule", {
 	getDom: function() {
 		var self = this;
 
-
-		// if (this.activeItem >= this.arrayOfSchedule.length) {
-		// 	this.activeItem = 0;
-		// }
+		if (this.activeItem >= this.arrayOfSchedule.length) {
+			this.activeItem = 0;
+		}
 
 		// create element wrapper for show into the module
 		var wrapper = document.createElement("div");
-		wrapper.id = "ratpschedule";
+		wrapper.className = "ratpschedule";
 		wrapper.innerHTML = "<h3>Statut RATP</h3>";
-		//
-		// var message = document.createElement("div");
-		// title.className = "bright medium light";
-		// title.innerHTML = this.arrayOfSchedule[this.activeItem];
-		// wrapper.appendChild(title);
+
+		var line = document.createElement("p");
+		line.className = "bright medium light";
+
+		var message = document.createElement("p");
+		message.className = "bright medium light";
+
+		if (this.arrayOfSchedule[this.activeItem] !== undefined) {
+
+			line.innerHTML = `Ligne: ${self.arrayOfSchedule[self.activeItem].line}`;
+			message.innerHTML = self.arrayOfSchedule[self.activeItem].message;
+
+		} else {
+
+			message.innerHTML = "Tout fonctionne bien sur la ligne";
+
+		}
+
+		wrapper.appendChild(line);
+		wrapper.appendChild(message);
 
 		return wrapper;
 
@@ -75,16 +90,16 @@ Module.register("ratpschedule", {
 	/* scheduleUpdateInterval()
 	 * Schedule visual update.
 	 */
-	// scheduleUpdateInterval: function() {
-	// 	var self = this;
-	//
-	// 	self.updateDom(self.config.animationSpeed);
-	//
-	// 	timer = setInterval(function() {
-	// 		self.activeItem++;
-	// 		self.updateDom(self.config.animationSpeed);
-	// 	}, this.config.updateInterval);
-	// },
+	scheduleUpdateInterval: function() {
+		var self = this;
+
+		self.updateDom(self.config.animationSpeed);
+
+		timer = setInterval(function() {
+			self.activeItem++;
+			self.updateDom(self.config.animationSpeed);
+		}, this.config.updateInterval);
+	},
 
 
 
@@ -114,6 +129,8 @@ Module.register("ratpschedule", {
 
 	// socketNotificationReceived from helper
 	socketNotificationReceived: function (notification, payload) {
+
+		let self = this;
 		// if(notification === "RETURN_SCHEDULE") {
 		//
 		// 	payload.forEach((e) => {
@@ -141,25 +158,31 @@ Module.register("ratpschedule", {
 
 			payload.forEach((e) => {
 
-				let container = document.createElement('p');
 
-				let name = document.createElement('span');
-				name.innerHTML = `Ligne: ${e.line} - `;
+				self.arrayOfSchedule.push(e);
 
-				let schedule = document.createElement('span');
-				schedule.innerHTML = e.message;
+			// 	let container = document.createElement('p');
+			//
+			// 	let name = document.createElement('span');
+			// 	name.innerHTML = `Ligne: ${e.line} - `;
+			//
+			// 	let schedule = document.createElement('span');
+			// 	schedule.innerHTML = e.message;
+			//
+			//
+			// 	container.classList.add('schedule__single');
+			// 	container.appendChild(name);
+			// 	container.appendChild(schedule);
+			//
+			// 	document.getElementById('ratpschedule').appendChild(container);
+			//
+			// })
 
+			});
 
-				container.classList.add('schedule__single');
-				container.appendChild(name);
-				container.appendChild(schedule);
-
-				document.getElementById('ratpschedule').appendChild(container);
-
-
-			})
+			this.scheduleUpdateInterval();
 
 		}
+	}
 
-	},
 });

@@ -29,7 +29,7 @@ Module.register("citymapper", {
         type: "rers",
         code: "A",
         station: "noisy-champs",
-        way: "A",
+        way: "A"
     },
 
     requiresVersion: "2.1.0",
@@ -52,8 +52,9 @@ Module.register("citymapper", {
 
       // create element wrapper for show into the module
       var wrapper = document.createElement("div");
-      wrapper.id = "traveltime";
-      wrapper.innerHTML = "CITYMAPPER";
+      wrapper.id = "citymapper";
+      wrapper.className = "citymapper";
+      wrapper.innerHTML = `<h3 class="title">Prochains horaires à partir de ${this.config.station}</h3>`;
 
       return wrapper;
     },
@@ -78,7 +79,7 @@ Module.register("citymapper", {
       // RETURN TRAVEL TIME@
       if (notification === "RETURN-TRAVELTIME") {
         document.getElementById('traveltime').innerHTML = `You'll be at work in ${payload.travel_time_minutes}mn` ;
-        self.updateDom(1000);
+
       }
 
       // RETURN SCHEDULE
@@ -92,6 +93,7 @@ Module.register("citymapper", {
           name.innerHTML = `${e.code} - `;
 
           let schedule = document.createElement('span');
+          schedule.className = "bright medium light";
           schedule.innerHTML = e.message;
 
 
@@ -99,10 +101,10 @@ Module.register("citymapper", {
           container.appendChild(name);
           container.appendChild(schedule);
 
-          document.getElementById('traveltime').appendChild(container);
+          document.getElementById('citymapper').appendChild(container);
 
         })
-        self.updateDom(1000);
+
       }
     },
 

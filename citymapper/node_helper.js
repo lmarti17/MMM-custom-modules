@@ -50,7 +50,7 @@ module.exports = NodeHelper.create({
 		axios.get(`${payload.baseUrlRatp}/${payload.endpoint}/${payload.type}/${payload.code}/${payload.station}/${payload.way}`)
 		.then(function (response){
 
-			console.log(response.data.result);
+			// console.log(response.data.result);
 			let array = [];
 
 			response.data.result.schedules.forEach((e, index) => {
